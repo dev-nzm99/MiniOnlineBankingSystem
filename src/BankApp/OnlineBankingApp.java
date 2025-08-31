@@ -36,6 +36,11 @@ public class OnlineBankingApp {
                     name =  sc.readLine();
                     System.out.print("\nEnter password: ");
                     pass_code =  Integer.parseInt(sc.readLine());;
+                    if(Model.BankManagement.loginAccount(name,pass_code)){
+                        System.out.println("MSG: login Successfully!\n");
+                    }else{
+                        System.out.println("ERR: login failed!\n");
+                    }
                     break;
             }
         }catch(Exception e){
