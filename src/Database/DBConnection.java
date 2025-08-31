@@ -6,8 +6,8 @@ public class DBConnection {
     public static Connection con = null;
     public static Connection getConnection() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String URL = "jdbc:mysql://localhost:3306/bankinfo";
+            Class.forName("com.mysql.cj.jdbc.Driver"); //register JDBC Driver
+            String URL = "jdbc:mysql://localhost:3306/bankinfo"; //URL_format: jdbc:mysql://hostname/databaseName
             String user = "root";
             String pass = "19384556";
             con = DriverManager.getConnection(URL, user, pass);

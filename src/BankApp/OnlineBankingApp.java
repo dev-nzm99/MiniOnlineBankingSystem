@@ -38,7 +38,6 @@ public class OnlineBankingApp {
                     pass_code =  Integer.parseInt(sc.readLine());;
                     break;
             }
-
         }catch(Exception e){
             System.out.println("Please,,,Enter Valid Entry!");
         }
