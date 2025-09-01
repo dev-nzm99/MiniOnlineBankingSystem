@@ -10,11 +10,14 @@ public class OnlineBankingApp {
         int acc_no;
         int choice;
         do {
-            System.out.println(
-                    "\n ->||    Welcome to InBank    ||<- \n");
-            System.out.println("1)Create Account.");
-            System.out.println("2)Login Account.");
-        try{
+            System.out.println("===========================================================");
+            System.out.println("           ->||    Welcome to SwiftPay Bank    ||<-       ");
+            System.out.println("===========================================================");
+            System.out.printf("%-5s %-20s%n", "1)", "Create Account");
+            System.out.printf("%-5s %-20s%n", "2)", "Login Account");
+            System.out.println("===========================================================");
+
+            try{
             System.out.print("\nEnter input:");
             choice = Integer.parseInt(sc.readLine());
             if(choice > 2)
@@ -32,11 +35,11 @@ public class OnlineBankingApp {
                     }
                     break;
                 case 2:
-                    System.out.print("Enter UserName: ");
+                    System.out.print("Enter Username: ");
                     name =  sc.readLine();
-                    System.out.print("\nEnter password: ");
+                    System.out.print("Enter password: ");
                     pass_code =  Integer.parseInt(sc.readLine());;
-                    if(Model.BankManagement.loginAccount(name,pass_code)){
+                    if(Model.BankManagement.loginAccount(name,pass_code,sc)){
                         System.out.println("MSG: login Successfully!\n");
                     }else{
                         System.out.println("ERR: login failed!\n");
