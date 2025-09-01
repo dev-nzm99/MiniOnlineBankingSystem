@@ -69,7 +69,7 @@ public class BankManagement {
                         } else if (ch == 4) {
                             BankManagement.getBalance(senderAc);
                         } else if (ch == 7) {
-                            System.out.println("Logging out...");
+                            System.out.println("Logging out successfully.");
                             break;
 
                         } else {
