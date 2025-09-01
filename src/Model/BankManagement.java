@@ -66,9 +66,9 @@ public class BankManagement {
                                 System.out.println("ERR: Transaction failed.");
                             }
 
-                        } else if (ch == 4) {
+                        } else if (ch == 6) {
                             BankManagement.getBalance(senderAc);
-                        } else if (ch == 7) {
+                        } else if (ch == 3) {
                             System.out.println("Logging out successfully.");
                             break;
 
