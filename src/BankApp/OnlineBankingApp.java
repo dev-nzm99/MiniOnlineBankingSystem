@@ -24,7 +24,7 @@ public class OnlineBankingApp {
                 throw new Exception();
             switch(choice){
                 case 1:
-                    System.out.print("Enter unique UserName: ");
+                    System.out.print("Enter unique Username: ");
                     name = sc.readLine();
                     System.out.print("Enter new password : ");
                     pass_code =  Integer.parseInt(sc.readLine());
