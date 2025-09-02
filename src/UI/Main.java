@@ -1,13 +1,12 @@
-package BankApp;
-import Model.BankManagement;
-import Model.BankOperations;
+package UI;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class OnlineBankingApp {
+public class Main {
     public static void main(String[] args) {
         BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
-        BankOperations bank = new BankManagement();
+        CreateAccount create_new_acc = new CreateAccount();
+        LoginAccount logIn = new LoginAccount();
         String name = "";
         int pass_code;
         int acc_no;
@@ -31,7 +30,7 @@ public class OnlineBankingApp {
                     name = sc.readLine();
                     System.out.print("Enter new password : ");
                     pass_code =  Integer.parseInt(sc.readLine());
-                    if(bank.createAccount(name,pass_code)){
+                    if(create_new_acc.addNewAccount(name,pass_code)){
                         System.out.println("MSG: Account created successfully!");
                     }else{
                         System.out.println("ERR: Account Creation failed.");
@@ -42,10 +41,11 @@ public class OnlineBankingApp {
                     name =  sc.readLine();
                     System.out.print("Enter password: ");
                     pass_code =  Integer.parseInt(sc.readLine());;
-                    if(bank.loginAccount(name,pass_code,sc)){
+                    if(logIn.authenticate_User(name,pass_code,sc)){
                         System.out.println("MSG: login Successfully!\n");
                     }else{
-                        System.out.println("ERR: login failed!\n");
+                        System.out.println("⚠️  LOGIN FAILED!");
+                        System.out.println("Please provide the correct username and password.");
                     }
                     break;
             }
