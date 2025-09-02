@@ -20,7 +20,10 @@ public class AccountServices implements Management {
             ps.setInt(1,amount);
             ps.setInt(2,ac_no);
             int rs = ps.executeUpdate();
-            return (rs==1)?true:false;
+            if(rs == 1){
+                logTransaction(ac_no,0,amount,"Deposit");
+                return true;
+            }else return false;
           }
        }catch (Exception e){
            e.printStackTrace();
@@ -63,7 +66,7 @@ public class AccountServices implements Management {
                 st.setInt(2, receiverAcc);
                 st.executeUpdate();
             }
-
+            logTransaction(senderAcc, receiverAcc, amount, "Transfer");
             System.out.println("Transaction successful!");
             return true;
 
@@ -72,7 +75,6 @@ public class AccountServices implements Management {
             return false;
         }
     }
-
     @Override
     public void getBalance(int ac_no) {
         try {
@@ -96,5 +98,18 @@ public class AccountServices implements Management {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public void logTransaction(int senderAcc,int receiverAcc,double amount,String type){
+       String sql_query = "INSERT INTO transaction_history(sender_ac,receiver_ac,amount,type) VALUES(?,?,?,?)";
+       try(PreparedStatement ps = con.prepareStatement(sql_query)){
+           ps.setInt(1,senderAcc);
+           ps.setInt(2,receiverAcc);
+           ps.setDouble(3,amount);
+           ps.setString(4,type);
+           ps.executeUpdate();
+       }catch (Exception e){
+           e.printStackTrace();
+       }
     }
 }

@@ -33,7 +33,7 @@ public class Main {
                     if(create_new_acc.addNewAccount(name,pass_code)){
                         System.out.println("MSG: Account created successfully!");
                     }else{
-                        System.out.println("ERR: Account Creation failed.");
+                        System.out.println("Error: Account Creation failed.");
                     }
                     break;
                 case 2:
@@ -50,7 +50,7 @@ public class Main {
                     break;
             }
         }catch(Exception e){
-            System.out.println("Please,,,Enter Valid Entry!");
+            System.out.println("Please, Enter Valid Entry!");
         }
         }while(true);
     }
