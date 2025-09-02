@@ -3,10 +3,15 @@ import Database.DBConnection;
 import java.io.BufferedReader;
 import java.sql.*;
 
-public class BankManagement {
-    public static Connection con = DBConnection.getConnection();
+public class BankManagement implements BankOperations {
+    private Connection con;
 
-    public static boolean createAccount(String name, int pass) {
+    public BankManagement() {
+        this.con = DBConnection.getConnection();
+    }
+
+    @Override
+    public boolean createAccount(String name, int pass) {
         if (name == null || name.isEmpty() || pass == 0) {
             System.out.println("All fields required.");
             return false;
@@ -27,7 +32,8 @@ public class BankManagement {
         return false;
     }
 
-    public static boolean loginAccount(String name, int passCode, BufferedReader sc) {
+    @Override
+    public boolean loginAccount(String name, int passCode, BufferedReader sc) {
         if (name == null || name.isEmpty() || passCode == 0) {
             System.out.println("All fields required!");
             return false;
@@ -66,12 +72,11 @@ public class BankManagement {
                                 System.out.println("ERR: Transaction failed.");
                             }
 
-                        } else if (ch == 6) {
-                            BankManagement.getBalance(senderAc);
-                        } else if (ch == 3) {
+                        } else if (ch == 4) {
+                            getBalance(senderAc);
+                        } else if (ch == 7) {
                             System.out.println("Logging out successfully.");
                             break;
-
                         } else {
                             System.out.println("Enter a valid option!");
                         }
@@ -87,7 +92,8 @@ public class BankManagement {
         }
     }
 
-    public static boolean transferMoney(int senderAcc, int receiverAcc, int amount) {
+    @Override
+    public boolean transferMoney(int senderAcc, int receiverAcc, int amount) {
         if (receiverAcc == 0 || amount <= 0) {
             System.out.println("All fields required.");
             return false;
@@ -131,25 +137,29 @@ public class BankManagement {
             return false;
         }
     }
-    public static void getBalance(int ac_no){
-        try{
-            String sql = "SELECT * FROM customer WHERE ac_no = "+ac_no;
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery(sql);
-            System.out.println("-----------------------------------------------------------");
-            System.out.printf("%-12s %-20s %-10s%n", "Account No", "Name", "Balance");
-            System.out.println("-----------------------------------------------------------");
-            
-            while (rs.next()) {
-                int acNo = rs.getInt("ac_no");
-                String name = rs.getString("c_name");
-                double balance = rs.getDouble("balance");
 
-                System.out.printf("%-12d %-20s %-10.2f%n", acNo, name, balance);
+    @Override
+    public void getBalance(int ac_no) {
+        try {
+            String sql = "SELECT * FROM customer WHERE ac_no = ?";
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setInt(1, ac_no);
+                ResultSet rs = ps.executeQuery();
+
+                System.out.println("-----------------------------------------------------------");
+                System.out.printf("%-12s %-20s %-10s%n", "Account No", "Name", "Balance");
+                System.out.println("-----------------------------------------------------------");
+
+                while (rs.next()) {
+                    int acNo = rs.getInt("ac_no");
+                    String name = rs.getString("c_name");
+                    double balance = rs.getDouble("balance");
+
+                    System.out.printf("%-12d %-20s %-10.2f%n", acNo, name, balance);
+                }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
