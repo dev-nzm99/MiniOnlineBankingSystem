@@ -17,12 +17,12 @@ public class Main {
             System.out.println("===========================================================");
             System.out.printf("%-5s %-20s%n", "1)", "Create Account");
             System.out.printf("%-5s %-20s%n", "2)", "Login Account");
+            System.out.printf("%-5s %-20s%n", "3)", "Exit");
             System.out.println("===========================================================");
-
             try{
             System.out.print("\nEnter input:");
             choice = Integer.parseInt(sc.readLine());
-            if(choice > 2)
+            if(choice > 3)
                 throw new Exception();
             switch(choice){
                 case 1:
@@ -48,6 +48,8 @@ public class Main {
                         System.out.println("Please provide the correct username and password.");
                     }
                     break;
+                case 3:
+                    System.exit(0);
             }
         }catch(Exception e){
             System.out.println("Please, Enter Valid Entry!");

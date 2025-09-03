@@ -4,6 +4,8 @@ public interface Management {
     boolean transferMoney(int senderAcc, int receiverAcc, int amount);
     void getBalance(int ac_no);
     boolean depositAmount(int amount,int ac_no);
+    boolean withdrawAmount(int amount,int ac_no);
     void logTransaction(int senderAcc,int receiverAcc,double amount,String type);
+    void showAllTransactions(int ac_no);
 }
 
