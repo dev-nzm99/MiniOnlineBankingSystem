@@ -31,7 +31,7 @@ public class LoginAccount {
                         System.out.println("-----------------------------------------------------------");
                         System.out.printf("%-20s %-20s %-20s%n", "1) Deposit", "2) Withdraw", "3) Transfer Money");
                         System.out.printf("%-20s %-20s %-20s%n", "4) View Balance", "5) Transaction History", "6) Change Password");
-                        System.out.printf("%-20s%n", "7) LogOut");
+                        System.out.printf("%-20s %-20s %-20s%n","8) Request Money","9) View Requests","8) LogOut");
                         System.out.println("-----------------------------------------------------------");
 
                         System.out.print("Enter Choice: ");

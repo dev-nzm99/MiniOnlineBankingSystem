@@ -77,9 +77,9 @@ public class AccountServices implements Management {
             return false;
         }
         try (Connection con = DBConnection.getConnection()){
-            sql_query = "SELECT balance FROM customer WHERE ac_no = ?";
+            sql_query = "SELECT * FROM customer WHERE ac_no = ?";
             try (PreparedStatement ps = con.prepareStatement(sql_query)) {
-                ps.setInt(1, senderAcc);
+                ps.setInt(1, receiverAcc);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     if (rs.getInt("balance") < amount) {
@@ -87,7 +87,7 @@ public class AccountServices implements Management {
                         return false;
                     }
                 } else {
-                    System.out.println("Sender account not found.");
+                    System.out.println("Receiver account not found.");
                     return false;
                 }
             }
@@ -98,7 +98,6 @@ public class AccountServices implements Management {
                 st.setInt(2, senderAcc);
                 st.executeUpdate();
             }
-
             // credit receiver
             sql_query = "UPDATE customer SET balance = balance + ? WHERE ac_no = ?";
             try (PreparedStatement st = con.prepareStatement(sql_query)) {
@@ -191,5 +190,4 @@ public class AccountServices implements Management {
               e.printStackTrace();
           }
     }
-
 }
