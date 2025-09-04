@@ -8,4 +8,3 @@ public interface Management {
     void logTransaction(int senderAcc,int receiverAcc,double amount,String type);
     void showAllTransactions(int ac_no);
 }
-

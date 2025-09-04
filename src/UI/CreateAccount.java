@@ -21,7 +21,7 @@ public class CreateAccount {
                 return true;
             }
         } catch (SQLException e) {
-            System.out.println("Error: Username might already exist!");
+            System.out.println("ERR: Username might already exist!");
         } catch (Exception e) {
             e.printStackTrace();
         }

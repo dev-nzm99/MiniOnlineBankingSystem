@@ -31,7 +31,7 @@ public class LoginAccount {
                         System.out.println("-----------------------------------------------------------");
                         System.out.printf("%-20s %-20s %-20s%n", "1) Deposit", "2) Withdraw", "3) Transfer Money");
                         System.out.printf("%-20s %-20s %-20s%n", "4) View Balance", "5) Transaction History", "6) Change Password");
-                        System.out.printf("%-20s %-20s %-20s%n","8) Request Money","9) View Requests","8) LogOut");
+                        System.out.printf("%-20s%n","7) LogOut");
                         System.out.println("-----------------------------------------------------------");
 
                         System.out.print("Enter Choice: ");
@@ -43,7 +43,7 @@ public class LoginAccount {
                             if (O_P.depositAmount(amount, senderAc)) {
                                 System.out.println("MSG: Money deposit successfully!");
                             }else {
-                                System.out.println("Error: Deposit failed!");
+                                System.out.println("ERR: Deposit failed!");
                             }
                         }else if(ch == 2){
                             System.out.print("Enter the amount: ");
@@ -51,7 +51,7 @@ public class LoginAccount {
                             if(O_P.withdrawAmount(amount,senderAc)){
                                 System.out.println("MSG: Money withdrawal successful. Amount: " + amount + " Tk");
                             }else{
-                                System.out.println("Error: Withdrawal failed!");
+                                System.out.println("ERR: Withdrawal failed!");
                             }
                         }else if (ch == 3) {
                             System.out.print("Enter Receiver A/c No: ");
@@ -62,7 +62,7 @@ public class LoginAccount {
                             if (O_P.transferMoney(senderAc, receiverAc, amt)) {
                                 System.out.println("MSG: Money sent successfully!");
                             } else {
-                                System.out.println("Error: Transaction failed.");
+                                System.out.println("ERR: Transaction failed.");
                             }
                         } else if (ch == 4) {
                             O_P.getBalance(senderAc);

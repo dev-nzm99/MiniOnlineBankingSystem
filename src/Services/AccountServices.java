@@ -170,17 +170,20 @@ public class AccountServices implements Management {
               PreparedStatement ps = con.prepareStatement(sql_query)){
               ps.setInt(1,ac_no);
               try(ResultSet rs = ps.executeQuery()){
-                  System.out.printf("%-12s %-12s %-10s %-15s %-20s%n",
-                          "Sender", "Receiver", "Amount", "Type", "Date/Time");
-                  while (rs.next()){ //traverse every row in the result set until there are no more rows.
-                      int sender_ac = rs.getInt("sender_ac");
-                      int receiver_ac = rs.getInt("receiver_ac");
-                      double amount = rs.getDouble("amount");
-                      String Type = rs.getString("type");
-                      String date_time = rs.getString("timestamp");
-                      System.out.printf("%-12d %-12d %-10.2f %-15s %-20s%n",
-                               sender_ac, receiver_ac, amount, Type, date_time);
-                  }
+                 if(rs.next()){
+                     System.out.printf("%-12s %-12s %-10s %-15s %-20s%n",
+                             "Sender", "Receiver", "Amount", "Type", "Date/Time");
+                         int sender_ac = rs.getInt("sender_ac");
+                         int receiver_ac = rs.getInt("receiver_ac");
+                         double amount = rs.getDouble("amount");
+                         String Type = rs.getString("type");
+                         String date_time = rs.getString("timestamp");
+                         System.out.printf("%-12d %-12d %-10.2f %-15s %-20s%n",
+                                 sender_ac, receiver_ac, amount, Type, date_time);
+
+                 }else{
+                     System.out.println("No transaction history found!");
+                 }
               }
           }catch (SQLException e){
               System.out.println("ERR: Database error!");
