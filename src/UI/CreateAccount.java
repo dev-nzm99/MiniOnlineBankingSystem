@@ -16,7 +16,7 @@ public class CreateAccount {
              PreparedStatement st = con.prepareStatement(sql)){    // try-with-resources for auto-closes the connection
             st.setString(1, name);
             st.setInt(2, pass);
-            if (st.executeUpdate() == 1) {
+            if (st.executeUpdate() > 0) {
                 System.out.println(name + ", your account has been created! Please login.");
                 return true;
             }
@@ -27,7 +27,7 @@ public class CreateAccount {
         }
         return false;
     }
-    static boolean changePassword(int senderAc,int curr_pass,int new_pass){
+    boolean changePassword(int senderAc,int curr_pass,int new_pass){
         String check_sql ="SELECT pass_code FROM customer WHERE ac_no = ?";
         String update_sql ="UPDATE customer SET pass_code = ? WHERE ac_no = ?";
         //verify current password

@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) {
         BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+        // Encapsulation: using objects to access functionality
         CreateAccount create_new_acc = new CreateAccount();
         LoginAccount logIn = new LoginAccount();
         String name = "";
@@ -30,6 +31,7 @@ public class Main {
                     name = sc.readLine();
                     System.out.print("Enter new password : ");
                     pass_code =  Integer.parseInt(sc.readLine());
+                    // Abstraction: User only calls method, not caring about DB details, SQL operation and so on
                     if(create_new_acc.addNewAccount(name,pass_code)){
                         System.out.println("MSG: Account created successfully!");
                     }else{
@@ -40,9 +42,9 @@ public class Main {
                     System.out.print("Enter Username: ");
                     name =  sc.readLine();
                     System.out.print("Enter password: ");
-                    pass_code =  Integer.parseInt(sc.readLine());;
+                    pass_code =  Integer.parseInt(sc.readLine());
                     if(logIn.authenticate_User(name,pass_code,sc)){
-                        System.out.println("MSG: login Successfully!\n");
+                        System.out.println("MSG: Logging out successfully.\n");
                     }else{
                         System.out.println("⚠️  LOGIN FAILED!");
                         System.out.println("Please provide the correct username and password.");

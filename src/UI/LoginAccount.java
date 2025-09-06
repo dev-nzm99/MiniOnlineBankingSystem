@@ -9,6 +9,7 @@ import java.util.SortedMap;
 
 public class LoginAccount {
     Management O_P = new AccountServices();
+    CreateAccount cng_pass = new CreateAccount();
     private int amount;
     public boolean authenticate_User(String name, int passCode, BufferedReader sc) {
         if (name == null || name.isEmpty() || passCode == 0) {
@@ -22,6 +23,7 @@ public class LoginAccount {
             st.setInt(2, passCode);
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
+                    System.out.print("MSG: login Successfully!\n");
                     int senderAc = rs.getInt("ac_no");
                     String userName = rs.getString("c_name");
 
@@ -73,29 +75,23 @@ public class LoginAccount {
                             int curr_pass = Integer.parseInt(sc.readLine());
                             System.out.print("Enter new password: ");
                             int new_pass = Integer.parseInt(sc.readLine());
-                            if(CreateAccount.changePassword(senderAc,curr_pass,new_pass)){
+                            if(cng_pass.changePassword(senderAc,curr_pass,new_pass)){
                                 System.out.println("MSG: Password change successfully! Please re-login.");
                                 System.out.println("-----------------------------------------------------------");
                                 System.out.print("Enter password: ");
-                                int pass_code =  Integer.parseInt(sc.readLine());;
-                                if(authenticate_User(userName,pass_code,sc)){
-                                    System.out.println("MSG: login Successfully!\n");
-                                }else{
-                                    System.out.println("⚠️  LOGIN FAILED!");
-                                    System.out.println("Please provide the correct username and password.");
-                                }
-                                break;
+                                int pass_code =  Integer.parseInt(sc.readLine());
+                                return authenticate_User(userName,pass_code,sc);
                             }else{
                                 System.out.println("ERR: Could not change password!");
                             }
                         }else if (ch == 7) {
-                            System.out.println("Logging out successfully.");
-                            break;
+                            return true;
                         } else {
                             System.out.println("Enter a valid option!");
                         }
                     }
-                    return true;
+                }else{
+                    return false;
                 }
             }
         }catch (SQLException e){

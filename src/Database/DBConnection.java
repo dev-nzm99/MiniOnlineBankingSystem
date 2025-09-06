@@ -4,9 +4,11 @@ import java.sql.DriverManager;
 
 public class DBConnection {
     public static Connection con = null;
+   /* Encapsulation: the main program doesn’t need to know the details of connecting to MySQL;
+    it just calls getConnection().*/
     public static Connection getConnection() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); //register JDBC Driver
+            Class.forName("com.mysql.cj.jdbc.Driver"); //loads the MySQL JDBC driver.
             String URL = "jdbc:mysql://localhost:3306/bankinfo"; //URL_format: jdbc:mysql://hostname/databaseName
             String user = "root";
             String pass = "19384556";

@@ -165,32 +165,35 @@ public class AccountServices implements Management {
     }
     @Override
     public void showAllTransactions(int ac_no){
-          sql_query = "SELECT * FROM transaction_history WHERE sender_ac = ? ORDER BY timestamp DESC";
-          try(Connection con = DBConnection.getConnection();
-              PreparedStatement ps = con.prepareStatement(sql_query)){
-              ps.setInt(1,ac_no);
-              try(ResultSet rs = ps.executeQuery()){
-                 if(rs.next()){
-                     System.out.printf("%-12s %-12s %-10s %-15s %-20s%n",
-                             "Sender", "Receiver", "Amount", "Type", "Date/Time");
-                         int sender_ac = rs.getInt("sender_ac");
-                         int receiver_ac = rs.getInt("receiver_ac");
-                         double amount = rs.getDouble("amount");
-                         String Type = rs.getString("type");
-                         String date_time = rs.getString("timestamp");
-                         System.out.printf("%-12d %-12d %-10.2f %-15s %-20s%n",
-                                 sender_ac, receiver_ac, amount, Type, date_time);
-
-                 }else{
-                     System.out.println("No transaction history found!");
-                 }
-              }
-          }catch (SQLException e){
-              System.out.println("ERR: Database error!");
-              e.printStackTrace();
-          }
-          catch (Exception e){
-              e.printStackTrace();
-          }
+        sql_query = "SELECT * FROM transaction_history WHERE sender_ac = ? ORDER BY timestamp DESC";
+        try(Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql_query)){
+            ps.setInt(1,ac_no);
+            try(ResultSet rs = ps.executeQuery()){
+                boolean hasTransactions = false;
+                System.out.printf("%-12s %-12s %-10s %-15s %-20s%n",
+                        "Sender", "Receiver", "Amount", "Type", "Date/Time");
+                while (rs.next()){ //traverse every row in the result set until there are no more rows.
+                    hasTransactions = true;
+                    int sender_ac = rs.getInt("sender_ac");
+                    int receiver_ac = rs.getInt("receiver_ac");
+                    double amount = rs.getDouble("amount");
+                    String Type = rs.getString("type");
+                    String date_time = rs.getString("timestamp");
+                    System.out.printf("%-12d %-12d %-10.2f %-15s %-20s%n",
+                            sender_ac, receiver_ac, amount, Type, date_time);
+                }
+                if(!hasTransactions){
+                    System.out.println("No transaction history found!");
+                }
+            }
+        }catch (SQLException e){
+            System.out.println("ERR: Database error!");
+            e.printStackTrace();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
 }
