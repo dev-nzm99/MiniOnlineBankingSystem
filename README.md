@@ -1,7 +1,7 @@
 # 🏦 Online Banking Console Application (Java + MySQL)
 **Author:** Nazmul Islam
 ## Overview
-This is a **console-based Online Banking Application** built using **Java (JDBC)** and **MySQL**.The project demonstrates how to connect a Java program to a relational database, perform basic **banking operations**, and handle user input.
+This is a console-based Online Banking Application developed in Java using JDBC and MySQL. This project demonstrates database connectivity without external APIs, showcasing core concepts of database integration, user input handling, and basic banking operations.
 ## Console UI:<br>
 <p align = "center">
 <img src="img/Screenshot 2025-10-02 102949.png" alt="Banking App Screenshot" width="500"/>
